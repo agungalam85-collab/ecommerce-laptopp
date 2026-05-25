@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Judul Halaman</title>
+  <link rel="stylesheet" href="index.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="logo">🛍️ Toko Online</div>
+    <div class="welcome">
+      <a href="avatar.html" title="Ganti Foto">
+        <img id="avatarPreview" src="/images/default.jpg" alt="Avatar" class="avatar-topbar" />
+      </a>
+      <span id="customerName">Customer</span>
+    </div>
+    <nav class="nav-links">
+      <a href="index.html">Produk</a>
+      <a href="keranjang.html">Keranjang</a>
+      <a href="riwayat.html">Riwayat</a>
+      <a href="profil.html">Profil</a>
+      <a href="avatar.html">Avatar</a>
+      <a href="pembayaran.html">Pembayaran</a>
+      <button id="logoutBtn">Logout</button>
+    </nav>
+  </header>
+
+  <!-- Konten halaman -->
+</body>
+</html>
+
+  <main>
+    <h2>Keranjang Kamu</h2>
+    <div id="cartList" class="product-grid">Memuat keranjang...</div>
+    <div id="cartTotal" class="cart-total"></div>
+    <button id="checkoutBtn">Checkout</button>
+  </main>
+
+  <script type="module" src="keranjang.js"></script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Pengiriman</title>
+  <link rel="stylesheet" href="index.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="logo">🛍️ Toko Online</div>
+    <div class="welcome">Halo, <span id="customerName">Customer</span></div>
+    <nav class="nav-links">
+      <a href="index.html">Produk</a>
+      <a href="keranjang.html">Keranjang</a>
+      <a href="riwayat.html">Riwayat</a>
+      <button id="logoutBtn">Logout</button>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Detail Pengiriman</h2>
+    <form id="shippingForm">
+      <h3>📦 Tujuan Pengiriman</h3>
+      <input type="text" id="name" placeholder="Nama Penerima" required />
+      <input type="text" id="phone" placeholder="Nomor HP" required />
+      <input type="email" id="email" placeholder="Email Penerima" required />
+      <textarea id="address" placeholder="Alamat Lengkap" required></textarea>
+      <input type="text" id="note" placeholder="Catatan (opsional)" />
+      <input type="text" id="postal" placeholder="Kode Pos" required />
+
+      <h3>🏬 Alamat Toko (Origin)</h3>
+      <input type="text" id="origin_address" placeholder="Alamat Toko" required />
+      <input type="text" id="origin_postal" placeholder="Kode Pos Toko" required />
+
+      <h3>🚚 Pilih Pengiriman</h3>
+      <select id="courier" required>
+        <option value="">-- Pilih Kurir --</option>
+        <option value="jne">JNE</option>
+        <option value="sicepat">SiCepat</option>
+        <option value="anteraja">AnterAja</option>
+      </select>
+
+      <select id="service" required>
+        <option value="">-- Pilih Layanan --</option>
+        <option value="reg">Reguler</option>
+        <option value="express">Express</option>
+      </select>
+
+      <button type="submit">Kirim Order</button>
+    </form>
+  </main>
+
+  <script type="module" src="pengiriman.js"></script>
+</body>
+</html>

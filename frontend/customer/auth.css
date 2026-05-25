@@ -1,0 +1,114 @@
+/* auth.css */
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #00c6ff, #0072ff);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+}
+
+main {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  width: 100%;
+  max-width: 400px;
+}
+
+h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+input {
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+}
+
+button {
+  padding: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  background-color: #fff;
+  color: #0072ff;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+  background-color: #e0e0e0;
+  transform: scale(1.05);
+}
+
+p {
+  margin-top: 20px;
+  font-size: 0.95rem;
+}
+
+a {
+  color: #fff;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+/* Animasi masuk */
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+main {
+  animation: fadeSlideUp 0.8s ease-out;
+}
+
+/* Input glow saat fokus */
+input:focus {
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+/* Smooth transition untuk input */
+input {
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Responsive layout untuk layar kecil */
+@media (max-width: 480px) {
+  main {
+    padding: 30px 20px;
+    border-radius: 8px;
+  }
+
+  h2 {
+    font-size: 1.6rem;
+  }
+
+  button {
+    font-size: 0.95rem;
+    padding: 10px;
+  }
+}

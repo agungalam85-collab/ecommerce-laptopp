@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Hitung Ongkos Kirim</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-6">
+  <div class="max-w-2xl mx-auto bg-white p-6 rounded shadow">
+    <h2 class="text-2xl font-bold mb-4">Hitung Ongkos Kirim</h2>
+
+    <select id="province" class="w-full p-2 border rounded mb-4"></select>
+    <select id="city" class="w-full p-2 border rounded mb-4"></select>
+    <select id="district" class="w-full p-2 border rounded mb-4"></select>
+
+    <input type="number" id="weight" placeholder="Berat Barang (gram)" class="w-full p-2 border rounded mb-4" />
+
+    <label class="block mb-2 font-medium">Pilih Kurir</label>
+    <div id="courier-group" class="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-4">
+      <!-- Radio button kurir akan diisi via JS -->
+    </div>
+
+    <button id="btn-check" class="w-full bg-indigo-600 text-white py-2 rounded">Hitung Ongkos Kirim</button>
+    <div id="loading" class="mt-4 hidden">⏳ Menghitung...</div>
+
+    <div id="results" class="mt-6 p-4 bg-indigo-50 border border-indigo-200 rounded hidden">
+      <h3 class="text-lg font-semibold mb-2">Hasil Perhitungan:</h3>
+      <div id="result-list" class="space-y-2"></div>
+    </div>
+  </div>
+
+  <script>
+    const BASE_URL = 'http://localhost:8000';
+    const provinceSelect = document.getElementById('province');
+    const citySelect = document.getElementById('city');
+    const districtSelect = document.getElementById('district');
+    const courierGroup = document.getElementById('courier-group');
+    const weightInput = document.getElementById('weight');
+    const btnCheck = document.getElementById('btn-check');
+    const loading = document.getElementById('loading');
+    const results = document.getElementById('results');
+    const resultList = document.getElementById('result-list');
+
+    const formatCurrency = (amount) => new Intl.NumberFormat('id-ID', {
+      style: 'currency', currency: 'IDR', minimumFractionDigits: 0
+    }).format(amount);
+
+    // Load provinsi
+    fetch(`${BASE_URL}/api/provinces`)
+      .then(res => res.json())
+      .then(data => {
+        provinceSelect.innerHTML = '<option value="">-- Pilih Provinsi --</option>';
+        data.forEach(p => {
+          provinceSelect.innerHTML += `<option value="${p.id}">${p.name}</option>`;
+        });
+      });
+
+    // Load kota
+    provinceSelect.addEventListener('change', () => {
+      const provId = provinceSelect.value;
+      if (!provId) return;
+      fetch(`${BASE_URL}/api/cities/${provId}`)
+        .then(res => res.json())
+        .then(data => {
+          citySelect.innerHTML = '<option value="">-- Pilih Kota --</option>';
+          data.forEach(c => {
+            citySelect.innerHTML += `<option value="${c.id}">${c.name}</option>`;
+          });
+        });
+    });
+
+    // Load kecamatan
+    citySelect.addEventListener('change', () => {
+      const cityId = citySelect.value;
+      if (!cityId) return;
+      fetch(`${BASE_URL}/api/districts/${cityId}`)
+        .then(res => res.json())
+        .then(data => {
+          districtSelect.innerHTML = '<option value="">-- Pilih Kecamatan --</option>';
+          data.forEach(d => {
+            districtSelect.innerHTML += `<option value="${d.id}">${d.name}</option>`;
+          });
+        });
+    });
+
+    // Kurir (hardcoded)
+    const couriers = ['jne', 'tiki', 'pos', 'sicepat', 'jnt', 'anteraja'];
+    courierGroup.innerHTML = couriers.map(c => `
+      <label class="flex items-center">
+        <input type="radio" name="courier" value="${c}" class="mr-2" />
+        ${c.toUpperCase()}
+      </label>
+    `).join('');
+
+    // Hitung Ongkir
+    btnCheck.addEventListener('click', () => {
+      const district_id = districtSelect.value;
+      const weight = weightInput.value;
+      const courier = document.querySelector('input[name="courier"]:checked')?.value;
+
+      if (!district_id || !weight || !courier) {
+        alert('Lengkapi semua data terlebih dahulu!');
+        return;
+      }
+
+      loading.classList.remove('hidden');
+      results.classList.add('hidden');
+      resultList.innerHTML = '';
+
+      fetch(`${BASE_URL}/api/check-ongkir`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ district_id, weight, courier })
+      })
+        .then(res => {
+          if (!res.ok) throw new Error('Gagal ambil ongkir');
+          return res.json();
+        })
+        .then(data => {
+          loading.classList.add('hidden');
+          results.classList.remove('hidden');
+          data.forEach(r => {
+            resultList.innerHTML += `
+              <div class="flex justify-between items-center p-3 bg-white rounded shadow border">
+                <span>${r.service} - ${r.description} (${r.etd})</span>
+                <span class="font-bold text-indigo-700">${formatCurrency(r.cost)}</span>
+              </div>
+            `;
+          });
+        })
+        .catch(err => {
+          loading.classList.add('hidden');
+          alert('Gagal menghitung ongkir. Cek console.');
+          console.error(err);
+        });
+    });
+  </script>
+</body>
+</html>

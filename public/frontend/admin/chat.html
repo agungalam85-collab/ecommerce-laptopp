@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chat Admin</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 0;
+    }
+
+    .chat-container {
+      max-width: 600px;
+      margin: 40px auto;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      padding: 20px;
+    }
+
+    h2 {
+      margin-top: 0;
+      text-align: center;
+      color: #333;
+    }
+
+    label {
+      font-weight: bold;
+      margin-bottom: 5px;
+      display: block;
+    }
+
+    select, textarea, button {
+      margin-top: 10px;
+      width: 100%;
+      padding: 10px;
+      font-size: 14px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .chat-box {
+      border: 1px solid #ccc;
+      padding: 10px;
+      height: 400px;
+      overflow-y: auto;
+      margin-top: 10px;
+      background-color: #fefefe;
+      border-radius: 6px;
+    }
+
+    .bubble {
+      padding: 10px 14px;
+      border-radius: 16px;
+      margin: 8px 0;
+      display: inline-block;
+      max-width: 80%;
+      word-wrap: break-word;
+      font-size: 14px;
+      line-height: 1.4;
+    }
+
+    .admin {
+      background: #d1ecf1;
+      color: #0c5460;
+      text-align: right;
+      float: right;
+      clear: both;
+    }
+
+    .customer {
+      background: #e2f0d9;
+      color: #155724;
+      text-align: left;
+      float: left;
+      clear: both;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="chat-container">
+    <h2>💬 Panel Chat Admin</h2>
+
+    <label for="customerSelect">Pilih Customer:</label>
+    <select id="customerSelect" onchange="loadMessages()">
+      <option value="">-- Pilih --</option>
+    </select>
+
+    <div id="chatBox" class="chat-box"></div>
+
+    <textarea id="messageInput" rows="3" placeholder="Tulis balasan..."></textarea>
+    <button onclick="sendReply()">Kirim</button>
+  </div>
+
+  <script>
+    const BASE_URL = 'http://localhost:8000';
+    const rawToken = localStorage.getItem('admin_token');
+    const token = rawToken?.startsWith('Bearer ') ? rawToken : `Bearer ${rawToken}`;
+
+    if (!rawToken) {
+      alert("Token admin tidak ditemukan. Silakan login ulang.");
+      window.location.href = "login.html";
+    }
+
+    let selectedCustomerId = null;
+
+    async function loadCustomers() {
+      try {
+        const res = await fetch(`${BASE_URL}/api/chat-customers`, {
+          headers: { 'Authorization': token }
+        });
+        const text = await res.text();
+        console.log('Response chat-customers:', text);
+        if (!res.ok) throw new Error('Gagal ambil data');
+        const customers = JSON.parse(text);
+        const select = document.getElementById('customerSelect');
+        customers.forEach(c => {
+          const opt = document.createElement('option');
+          opt.value = c.id;
+          opt.textContent = `${c.full_name || 'User #' + c.id} (${c.phone || '-'})`;
+          select.appendChild(opt);
+        });
+      } catch (err) {
+        console.error('Gagal ambil customer:', err);
+      }
+    }
+
+    async function loadMessages() {
+      selectedCustomerId = document.getElementById('customerSelect').value;
+      if (!selectedCustomerId) return;
+
+      try {
+        const res = await fetch(`${BASE_URL}/api/admin/chat-messages/${selectedCustomerId}`, {
+          headers: { 'Authorization': token }
+        });
+        const text = await res.text();
+        console.log('Response chat-messages:', text);
+        if (!res.ok) throw new Error('Gagal ambil chat');
+        const messages = JSON.parse(text);
+        const box = document.getElementById('chatBox');
+        box.innerHTML = '';
+        messages.forEach(msg => {
+          const bubble = document.createElement('div');
+          bubble.className = 'bubble ' + (msg.sender === 'admin' ? 'admin' : 'customer');
+          bubble.textContent = msg.text;
+          box.appendChild(bubble);
+        });
+        box.scrollTop = box.scrollHeight;
+      } catch (err) {
+        console.error('Gagal ambil chat:', err);
+      }
+    }
+
+    async function sendReply() {
+      const text = document.getElementById('messageInput').value;
+      if (!text.trim() || !selectedCustomerId) return;
+
+      try {
+        const res = await fetch(`${BASE_URL}/api/admin/chat-reply`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': token
+          },
+          body: JSON.stringify({
+            customer_id: selectedCustomerId,
+            message: text
+          })
+        });
+        const responseText = await res.text();
+        console.log('Response chat-reply:', responseText);
+        if (!res.ok) throw new Error('Gagal kirim pesan');
+        document.getElementById('messageInput').value = '';
+        loadMessages();
+      } catch (err) {
+        console.error('Gagal kirim:', err);
+      }
+    }
+
+    setInterval(() => {
+      if (selectedCustomerId) loadMessages();
+    }, 5000);
+
+    loadCustomers();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Checkout - Toko Agung</title>
+  <link rel="stylesheet" href="index.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="logo">🛍️ Toko Online</div>
+    <div class="user-info">
+      <a href="avatar.html" title="Ganti Foto">
+        <img id="avatarPreview" src="/images/default.jpg" alt="Avatar" class="avatar-topbar" />
+      </a>
+      <span class="greeting">Halo, <span id="customerName">Customer</span></span>
+    </div>
+    <nav class="nav-links">
+      <a href="index.html">Produk</a>
+      <a href="keranjang.html">Keranjang</a>
+      <a href="riwayat.html">Riwayat</a>
+      <a href="pembayaran.html">Pembayaran</a>
+      <button id="logoutBtn">Logout</button>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Checkout Pengiriman</h2>
+    <form id="checkoutForm" class="form-box">
+      <label for="address">Alamat Tujuan</label>
+      <textarea id="address" required></textarea>
+
+      <label>Produk yang Dibeli</label>
+      <ul id="product_ids" class="checkout-product-list"></ul>
+
+      <label for="province">Provinsi</label>
+      <select id="province" required></select>
+
+      <label for="city">Kota</label>
+      <select id="city" required></select>
+
+      <label for="district">Kecamatan</label>
+      <select id="district" required></select>
+
+      <label for="weight">Berat Barang (gram)</label>
+      <input type="number" id="weight" required min="1" />
+
+      <label for="courier">Kurir</label>
+      <select id="courier" required></select>
+
+      <div id="shipping-cost">Ongkir: Rp0</div>
+
+      <label for="payment">Metode Pembayaran</label>
+      <select id="payment" required>
+        <option value="midtrans">Midtrans</option>
+        <option value="cod">Bayar di Tempat</option>
+      </select>
+
+      <div id="product-total">Total Produk: Rp0</div>
+      <div id="grand-total">Total Bayar: Rp0</div>
+
+      <button type="submit">Bayar Sekarang</button>
+    </form>
+
+    <div id="result" class="result-box"></div>
+
+    <!-- ✅ Tambahan tombol redirect -->
+    <button id="redirectBtn" style="display:none;" class="btn btn-warning">
+      Bayar di Tab Baru
+    </button>
+  </main>
+
+  <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="Mid-client-A_1dU7wQlkD792v2"></script>
+  <script type="module" src="checkout.js"></script>
+</body>
+</html>

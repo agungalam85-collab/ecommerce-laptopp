@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>MistarPart – Sparepart & Accessories Motor Berkualitas</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #00c6ff, #0072ff);
+      color: #fff;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      text-align: center;
+      padding: 40px 20px 20px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+
+    .category-filter {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    select {
+      padding: 10px;
+      border-radius: 6px;
+      border: none;
+      font-size: 1rem;
+    }
+
+    .auth-buttons {
+      margin-top: 15px;
+    }
+
+    .auth-buttons button {
+      padding: 10px 20px;
+      margin: 0 5px;
+      border: none;
+      border-radius: 6px;
+      background: #fff;
+      color: #0072ff;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .auth-buttons button:hover {
+      background: #f0f0f0;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .product-card {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 15px;
+      text-align: center;
+      transition: transform 0.2s ease, background-color 0.3s ease;
+      animation: fadeIn 0.5s ease;
+    }
+
+    .product-card:hover {
+      transform: scale(1.03);
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 160px;
+      object-fit: contain;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      background: #fff;
+    }
+
+    .product-card h3 {
+      font-size: 1.1rem;
+      margin: 5px 0;
+    }
+
+    .product-card p {
+      font-size: 0.9rem;
+      margin: 0;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    footer {
+      background:#002244;
+      color:#fff;
+      padding:40px 20px;
+      margin-top:30px;
+    }
+
+    footer .grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:20px;
+      text-align:left;
+    }
+
+    footer h3, footer h4 {
+      margin-top:0;
+    }
+
+    footer p {
+      margin:6px 0;
+      font-size:0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Selamat Datang di MistarPart</h1>
+    <p>Sparepart & Accessories Motor Berkualitas</p>
+    <div class="category-filter">
+      <label for="category">Filter Kategori:</label>
+      <select id="category">
+        <option value="">Semua Kategori</option>
+      </select>
+    </div>
+
+    <!-- 🔥 Tombol Login & Register -->
+    <div class="auth-buttons">
+      <button onclick="window.location.href='login.html'">Login</button>
+      <button onclick="window.location.href='register.html'">Register</button>
+    </div>
+  </header>
+
+  <section class="product-grid" id="productGrid">
+    <!-- Produk sparepart motor akan ditampilkan di sini -->
+  </section>
+
+  <!-- 🔧 Footer Bio -->
+  <footer>
+    <div class="grid">
+      <!-- Tentang Kami -->
+      <div>
+        <h3>🏍️ MistarPart</h3>
+        <p><strong>Sparepart & Accessories Motor Berkualitas</strong></p>
+        <p>MistarPart hadir sebagai solusi kebutuhan sparepart dan aksesoris motor dengan kualitas terjamin
+           dan harga bersahabat. Kami berkomitmen memberikan pelayanan terbaik agar setiap pelanggan
+           mendapatkan produk yang sesuai dengan kebutuhan kendaraannya.</p>
+      </div>
+
+      <!-- Kontak -->
+      <div>
+        <h4>📞 Kontak</h4>
+        <p>📍 Alamat:<br/> Gg. H. Tosin RT003/RW005 Sudimara Sel, Kec. Ciledug, Kota Tangerang, Banten 15151</p>
+        <p>📱 Telp/WA: 085890501191</p>
+        <p>✉️ Email: <em>info@mistarpart.com</em></p>
+        <p>⏰ Jam Operasional:<br/> Senin–Sabtu, 09.00–18.00 WIB</p>
+      </div>
+
+      <!-- Informasi -->
+      <div>
+        <h4>ℹ️ Informasi</h4>
+        <p>🔗 Sosial Media: <em>Segera menyusul</em></p>
+        <p>© 2020–2025 MistarPart. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const API_BASE = 'http://localhost:8000';
+    const categorySelect = document.getElementById('category');
+    const productGrid = document.getElementById('productGrid');
+
+    async function fetchCategories() {
+      try {
+        const res = await fetch(`${API_BASE}/api/categories`);
+        const data = await res.json();
+        data.forEach(cat => {
+          const opt = document.createElement('option');
+          opt.value = cat.id;
+          opt.textContent = cat.name;
+          categorySelect.appendChild(opt);
+        });
+      } catch (err) {
+        console.error('Gagal ambil kategori:', err);
+      }
+    }
+
+    async function fetchProducts(categoryId = '') {
+      try {
+        const url = categoryId
+          ? `${API_BASE}/api/products?category_id=${categoryId}`
+          : `${API_BASE}/api/products`;
+        const res = await fetch(url);
+        const data = await res.json();
+        renderProducts(data.data || data);
+      } catch (err) {
+        console.error('Gagal ambil produk:', err);
+        productGrid.innerHTML = '<p style="grid-column: 1 / -1; text-align:center;">Gagal memuat produk.</p>';
+      }
+    }
+
+    function renderProducts(products) {
+      productGrid.innerHTML = '';
+      products.forEach(p => {
+        const card = document.createElement('div');
+        card.className = 'product-card';
+        const imagePath = p.images?.[0]?.path
+          ? `${API_BASE}/storage/${p.images[0].path}`
+          : 'https://via.placeholder.com/300x160?text=No+Image';
+        card.innerHTML = `
+          <img src="${imagePath}" alt="${p.name}" />
+          <h3>${p.name}</h3>
+          <p>${formatRupiah(p.price)}</p>
+        `;
+        card.addEventListener('click', () => {
+          window.location.href = `produk-detail.html?id=${p.id}`;
+        });
+        productGrid.appendChild(card);
+      });
+    }
+
+    function formatRupiah(angka) {
+      return new Intl.NumberFormat('id-ID', {
+        style: 'currency',
+        currency: 'IDR',
+        minimumFractionDigits: 0
+      }).format(angka);
+    }
+
+    categorySelect.addEventListener('change', () => {
+      fetchProducts(categorySelect.value);
+    });
+
+    fetchCategories();
+    fetchProducts();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,394 @@
+/* Reset dasar */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f4f6f8;
+  color: #333;
+  line-height: 1.6;
+  padding-bottom: 50px;
+}
+
+/* Topbar */
+.topbar {
+  background-color: #007bff;
+  color: white;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.welcome {
+  font-size: 1em;
+}
+
+.nav-links {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.nav-links button {
+  background-color: #dc3545;
+  border: none;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.nav-links button:hover {
+  background-color: #c82333;
+}
+
+/* Main content */
+main {
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 0 20px;
+}
+
+h2 {
+  margin-bottom: 20px;
+  color: #007bff;
+}
+
+/* Product grid */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.product-card {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  padding: 15px;
+  text-align: center;
+}
+
+.product-card img {
+  max-width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.product-card h4 {
+  margin: 10px 0;
+  font-size: 1.1em;
+}
+
+.product-card p {
+  font-weight: bold;
+  color: #28a745;
+}
+
+.product-card button {
+  margin-top: 10px;
+  background-color: #ffc107;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.product-card button:hover {
+  background-color: #e0a800;
+}
+
+/* Total dan Checkout */
+.cart-total {
+  margin-top: 30px;
+  font-size: 1.2em;
+  font-weight: bold;
+  text-align: right;
+}
+
+#checkoutBtn, #payBtn {
+  margin-top: 20px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  float: right;
+}
+
+#checkoutBtn:hover, #payBtn:hover {
+  background-color: #218838;
+}
+
+/* Form checkout */
+form {
+  margin-top: 30px;
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+form textarea, form select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+form h3 {
+  margin-bottom: 10px;
+  color: #555;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .topbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  #checkoutBtn, #payBtn {
+    width: 100%;
+    float: none;
+  }
+}
+
+.product-card .specs {
+  font-size: 0.9em;
+  color: #555;
+  margin: 4px 0;
+}
+.product-card .colors span {
+  display: inline-block;
+  margin-top: 4px;
+}
+
+.btn-detail {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 6px 12px;
+  background: #333;
+  color: white;
+  border-radius: 4px;
+  text-decoration: none;
+}
+
+.color-dot {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  margin-right: 6px;
+  vertical-align: middle;
+  border: 1px solid #ccc;
+}
+.color-preview {
+  margin-top: 6px;
+  font-size: 0.9em;
+  color: #444;
+}
+
+.form-card {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 500px;
+  margin: auto;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+label {
+  display: block;
+  margin-top: 10px;
+  font-weight: bold;
+}
+input, textarea, select {
+  width: 100%;
+  padding: 8px;
+  margin-top: 4px;
+}
+button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.avatar-topbar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 12px;
+  vertical-align: middle;
+  box-shadow: 0 0 4px rgba(0,0,0,0.2);
+  transition: transform 0.2s ease;
+
+
+}
+
+.welcome {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.avatar-topbar:hover {
+  transform: scale(1.05);
+  transition: 0.2s ease;
+}
+
+.checkout-product-list {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 1rem;
+}
+
+.checkout-product-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.5rem;
+  border-radius: 6px;
+  font-size: 0.95rem;
+}
+
+.checkout-product-list li::before {
+  content: "🛒";
+  margin-right: 0.5rem;
+}
+
+.form-box {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+
+.form-box label {
+  display: block;
+  margin-top: 1rem;
+  font-weight: bold;
+}
+
+.form-box input,
+.form-box select,
+.form-box textarea {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.25rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+#shipping-cost,
+#product-total,
+#grand-total {
+  margin-top: 1rem;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+#checkoutForm button[type="submit"] {
+  margin-top: 1.5rem;
+  background-color: #007bff;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+#checkoutForm button[type="submit"]:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
+}
+
+.checkout-product-list {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 1rem;
+}
+
+.product-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: #f9f9f9;
+  margin-bottom: 0.5rem;
+}
+
+.product-thumb {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.product-info {
+  flex: 1;
+  font-size: 0.95rem;
+}
+.recommendation {
+  background: #fff8e1;
+  padding: 15px;
+  border-left: 5px solid #ff9800;
+  margin-bottom: 30px;
+  border-radius: 5px;
+}
+.recommendation a {
+  color: #007bff;
+  text-decoration: none;
+}
+.recommendation small {
+  display: block;
+  margin-top: 5px;
+  color: #555;
+}
+
+.avatar-thumb {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-left: 8px;
+  vertical-align: middle;
+}

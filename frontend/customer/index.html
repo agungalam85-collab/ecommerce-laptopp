@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Katalog Produk – MistarPart</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="index.css" />
+  <style>
+    /* Sidebar */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 220px;              /* ✅ lebar sidebar */
+      height: 100%;
+      background: #111;
+      color: #fff;
+      padding: 20px;
+    }
+    .sidebar ul { list-style:none; padding:0; }
+    .sidebar li { margin:10px 0; }
+    .sidebar a { color:#fff; text-decoration:none; }
+
+    /* Konten utama bergeser */
+    .main-content {
+      margin-left: 220px;        /* ✅ geser sesuai lebar sidebar */
+      padding: 20px;
+    }
+
+    /* Chatbot bubble */
+    #chatbot-toggle {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #0072ff;
+      color: #fff;
+      font-size: 20px;
+      padding: 12px;
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      z-index: 9999;
+    }
+    #chatbot-float {
+      position: fixed;
+      bottom: 80px;
+      right: 20px;
+      width: 300px;
+      height: 400px;
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      display: none;
+      flex-direction: column;
+      font-family: 'Poppins', sans-serif;
+      z-index: 9999;
+    }
+    #chatbot-header {
+      background: #0072ff;
+      color: #fff;
+      padding: 8px;
+      border-radius: 12px 12px 0 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    #chatWindow {
+      flex: 1;
+      padding: 10px;
+      overflow-y: auto;
+      background: #f9f9f9;
+      display: flex;
+      flex-direction: column;
+    }
+    #chatbot-input { display: flex; border-top: 1px solid #ccc; }
+    #chatbot-input input { flex: 1; border: none; padding: 8px; }
+    #chatbot-input button { border: none; background: #0072ff; color: #fff; padding: 8px 12px; cursor: pointer; }
+
+    .bubble-user {
+      background:#0072ff; color:#fff;
+      padding:6px 10px; border-radius:16px;
+      margin:4px; max-width:70%; align-self:flex-end;
+    }
+    .bubble-bot {
+      background:#e0e0e0; color:#000;
+      padding:6px 10px; border-radius:16px;
+      margin:4px; max-width:70%; align-self:flex-start;
+    }
+
+    .product-card img {
+      width: 100%; height: 160px;
+      object-fit: contain; border-radius: 8px;
+      margin-bottom: 10px; background: #fff;
+    }
+
+    /* Footer bio bergeser */
+    footer {
+      background:#002244; color:#fff;
+      padding:40px 40px; margin-top:30px;
+      margin-left: 220px;           /* ✅ geser sesuai sidebar */
+    }
+   footer .grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;
+  text-align:left;
+  padding-left: 40px;  /* ✅ geser teks ke kanan */
+}
+
+
+    footer h3, footer h4 { margin-top:0; }
+    footer p { margin:6px 0; font-size:0.9rem; }
+  </style>
+</head>
+<body>
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <h3>📂 Menu</h3>
+    <ul>
+      <li><a href="index.html">🏷️ Produk</a></li>
+      <li><a href="keranjang.html">🛒 Keranjang</a></li>
+      <li><a href="riwayat.html">📜 Riwayat</a></li>
+      <li><a href="profil.html">👤 Profil</a></li>
+      <li><a href="avatar.html">🖼️ Avatar</a></li>
+      <li><a href="wishlist.html">❤️ Wishlist</a></li>
+    </ul>
+  </aside>
+
+  <!-- Konten Utama -->
+  <div class="main-content">
+    <header class="topbar">
+      <div class="logo">🛍️ <strong>REVA</strong></div>
+      <div class="welcome">
+        <a href="avatar.html" title="Ganti Foto">
+          <img id="avatarPreview" src="/images/default.jpg" alt="Avatar" class="avatar-topbar" />
+        </a>
+        Halo, <span id="customerName">Customer</span>
+      </div>
+      <nav class="nav-links">
+        <button id="logoutBtn">Logout</button>
+      </nav>
+    </header>
+
+    <main>
+      <section class="section-card">
+        <h2>📂 Kategori</h2>
+        <div id="categoryList" class="category-grid">Memuat kategori...</div>
+      </section>
+
+      <section class="section-card">
+        <h2>🛍️ Daftar Produk</h2>
+        <div id="productList" class="product-grid">Memuat produk...</div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Chatbot -->
+  <div id="chatbot-toggle">💬</div>
+  <div id="chatbot-float">
+    <div id="chatbot-header">🤖 Kirim Pesan Admin <span id="chatbot-close" style="cursor:pointer;">✖</span></div>
+    <div id="chatWindow"></div>
+    <div id="chatbot-input">
+      <input id="chatInput" type="text" placeholder="Tulis pesan..." />
+      <button id="sendBtn">Kirim</button>
+    </div>
+  </div>
+
+  <!-- Footer Bio -->
+  <footer>
+    <div class="grid">
+      <div>
+        <h3>🏍️ MistarPart</h3>
+        <p><strong>Sparepart & Accessories Motor Berkualitas</strong></p>
+        <p>MistarPart hadir sebagai solusi kebutuhan sparepart dan aksesoris motor dengan kualitas terjamin
+           dan harga bersahabat. Kami berkomitmen memberikan pelayanan terbaik agar setiap pelanggan
+           mendapatkan produk yang sesuai dengan kebutuhan kendaraannya.</p>
+      </div>
+      <div>
+        <h4>📞 Kontak</h4>
+        <p>📍 Alamat:<br/> Gg. H. Tosin RT003/RW005 Sudimara Sel, Kec. Ciledug, Kota Tangerang, Banten 15151</p>
+        <p>📱 Telp/WA: 085890501191</p>
+        <p>✉️ Email: <em>info@mistarpart.com</em></p>
+        <p>⏰ Jam Operasional:<br/> Senin–Sabtu, 09.00–18.00 WIB</p>
+      </div>
+      <div>
+        <h4>ℹ️ Informasi</h4>
+        <p>🔗 Sosial Media: <em>Segera menyusul</em></p>
+        <p>© 2020–2025 MistarPart. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="index.js"></script>
+</body>
+</html>

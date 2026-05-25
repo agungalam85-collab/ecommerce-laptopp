@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kelola Produk</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="topbar.js" defer></script>
+</head>
+
+<header class="topbar">
+  <div class="topbar-left">
+    <span class="admin-name">admin</span>
+    <img id="avatar" src="assets/default-avatar.jpg" alt="Admin" class="profile-icon" />
+  </div>
+  <div class="topbar-right">
+    <span class="brand-name">Admin Panel</span>
+  </div>
+</header>
+
+<body>
+  <div class="sidebar">
+    <h2>Admin Menu</h2>
+    <ul>
+      <li><a href="dashboard.html">🏠 Dashboard</a></li>
+      <li><a href="produk.html" class="active">📦 Produk</a></li>
+      <li><a href="kategori.html">🗂️ Kategori</a></li>
+      <li><a href="pesanan.html">🧾 Pesanan</a></li>
+      <li><a href="pengguna.html">👥 Pengguna</a></li>
+      <li><a href="pengaturan.html">⚙️ Pengaturan</a></li>
+      <li><a href="#" onclick="logout()">🔓 Logout</a></li>
+    </ul>
+  </div>
+
+  <div class="main-content">
+    <h1>Kelola Produk</h1>
+    <a href="dashboard.html"><button>Kembali ke Dashboard</button></a>
+
+    <!-- Form Tambah Produk -->
+    <form id="addProductForm" enctype="multipart/form-data">
+      <input type="text" name="name" placeholder="Nama Produk" required />
+      <input type="text" name="description" placeholder="Deskripsi Produk" />
+      <input type="number" name="price" placeholder="Harga" required />
+      <input type="number" name="stock" placeholder="Stok" required />
+      <input
+        type="number"
+        name="weight"
+        placeholder="Berat (kg)"
+        step="0.01"
+        required
+        />
+      <select name="category_id" id="categorySelect" required></select>
+
+      <label>Gambar Produk</label>
+      <input type="file" name="images[]" multiple accept="image/*" onchange="previewImages(event)" />
+      <div id="imagePreview" class="preview-grid"></div>
+
+
+      <h4>Warna Produk</h4>
+      <div id="colorContainer"></div>
+      <button type="button" onclick="addColor()">+ Tambah Warna</button>
+
+      <button type="submit">Tambah Produk</button>
+    </form>
+
+    <!-- Form Edit Produk -->
+    <form id="editProductForm" style="display:none;" enctype="multipart/form-data">
+      <h3>Edit Produk</h3>
+      <input type="hidden" name="id" />
+      <input type="text" name="name" placeholder="Nama Produk" required />
+      <input type="text" name="description" placeholder="Deskripsi Produk" />
+      <input type="number" name="price" placeholder="Harga" required />
+      <input type="number" name="stock" placeholder="Stok" required />
+      <input
+        type="number"
+        name="weight"
+        placeholder="Berat (kg)"
+        step="0.01"
+        required
+        />
+      <select name="category_id" id="editCategorySelect" required></select>
+
+      <label>Gambar Produk</label>
+      <input type="file" name="images[]" multiple onchange="previewImagesEdit(event)" />
+      <div id="imagePreviewEdit" class="preview-grid"></div>
+
+
+
+      <h4>Edit Warna</h4>
+      <div id="editColorContainer"></div>
+      <button type="button" onclick="addColorEdit()">+ Tambah Warna</button>
+
+      <button type="submit">Simpan Perubahan</button>
+      <button type="button" onclick="cancelEdit()">Batal</button>
+    </form>
+
+    <!-- Daftar Produk -->
+    <div class="container">
+      <h2>Daftar Produk</h2>
+      <div class="filter-bar">
+        <input type="text" id="searchInput" placeholder="Cari produk..." oninput="applyFilter()" />
+        <select id="filterKategori" onchange="applyFilter()">
+          <option value="">Semua Kategori</option>
+        </select>
+        <button onclick="applyFilter()">Cari</button>
+      </div>
+      <ul id="productList">
+        <li>Memuat produk...</li>
+      </ul>
+    </div>
+  </div>
+
+  <script src="produk.js"></script>
+</body>
+</html>

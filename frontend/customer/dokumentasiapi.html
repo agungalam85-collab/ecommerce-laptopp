@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8" />
+<title>Dokumentasi API — Toko Keramik (Full)</title>
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<style>
+  :root{
+    --bg:#fafafa; --card:#fff; --muted:#6b7280; --primary:#1a73e8; --mono:#0f1720;
+  }
+  body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:#222;margin:0;padding:28px;max-width:1100px;margin-left:auto;margin-right:auto}
+  h1{color:var(--primary);margin:0 0 10px}
+  .intro{color:var(--muted);margin-bottom:18px}
+  section{background:var(--card);padding:18px;border-radius:10px;box-shadow:0 6px 18px rgba(20,20,30,0.04);margin-bottom:18px}
+  h2{color:#0f1720;margin-top:0}
+  pre,code{background:#f3f4f6;padding:12px;border-radius:8px;overflow:auto;font-family:Menlo,Monaco,monospace;font-size:13px}
+  .muted{color:var(--muted);font-size:14px}
+  .endpoint-row{display:flex;gap:12px;align-items:flex-start;flex-wrap:wrap}
+  .method{font-weight:700;padding:6px 10px;border-radius:8px;color:#fff;font-size:13px}
+  .GET{background:#10b981}
+  .POST{background:#0ea5e9}
+  .PUT{background:#f59e0b;color:#111}
+  .DELETE{background:#ef4444}
+  .small{font-size:13px;color:var(--muted)}
+  .iframe-preview{width:100%;height:260px;border:1px solid #e6e9ef;border-radius:8px;margin-top:12px}
+  .note{background:#fffceb;padding:10px;border-radius:8px;border:1px solid #fff3bf;color:#6b4f00}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:900px){ .grid{grid-template-columns:1fr} }
+</style>
+</head>
+<body>
+
+<h1>Dokumentasi API — Toko Keramik</h1>
+<p class="intro">Dokumentasi lengkap endpoint API. Gunakan header <code>Authorization: Bearer &lt;TOKEN&gt;</code> pada semua endpoint protected (auth:api). Iframe preview hanya untuk endpoint publik/demo tanpa auth.</p>
+
+<!-- AUTH -->
+<section>
+  <h2>1. Auth</h2>
+
+  <div class="endpoint-row">
+    <div class="method POST">POST</div>
+    <div>
+      <strong>/api/login</strong> — Login (admin/customer)<br>
+      <span class="small">Request Body JSON:</span>
+      <pre>{
+  "email": "admin@gmail.com",
+  "password": "12345678"
+}</pre>
+      <span class="small">Response: <em>status, user, token</em></span>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="endpoint-row">
+    <div class="method POST">POST</div>
+    <div>
+      <strong>/api/register</strong> — Register umum<br>
+      <span class="small">Request Body:</span>
+      <pre>{
+  "name": "Nama Lengkap",
+  "email": "user@example.com",
+  "password": "password",
+  "password_confirmation": "password"
+}</pre>
+    </div>
+  </div>
+
+  <div style="margin-top:10px" class="endpoint-row">
+    <div class="method POST">POST</div>
+    <div>
+      <strong>/api/register-customer</strong> — Register customer langsung (returns token)<br>
+      <span class="small">Request Body:</span>
+      <pre>{
+  "name": "Budi",
+  "email": "budi@example.com",
+  "password": "12345678"
+}</pre>
+    </div>
+  </div>
+
+  <div style="margin-top:10px" class="endpoint-row">
+    <div class="method POST">POST</div>
+    <div>
+      <strong>/api/logout</strong> — Logout (auth:api)
+      <div class="small">Use header Authorization: Bearer &lt;token&gt;</div>
+    </div>
+  </div>
+</section>
+
+<!-- PUBLIC -->
+<section>
+  <h2>2. Public — Produk & Kategori</h2>
+
+  <div class="grid">
+    <div>
+      <div class="endpoint-row">
+        <div class="method GET">GET</div>
+        <div>
+          <strong>/api/products</strong> — Daftar produk (public)<br>
+          <span class="small">Query params (opsional): page, per_page, q (search)</span>
+        </div>
+      </div>
+
+      <div class="endpoint-row" style="margin-top:10px">
+        <div class="method GET">GET</div>
+        <div>
+          <strong>/api/products/{id}</strong> — Detail produk
+        </div>
+      </div>
+
+      <div class="endpoint-row" style="margin-top:10px">
+        <div class="method GET">GET</div>
+        <div>
+          <strong>/api/categories</strong> — Daftar kategori
+        </div>
+      </div>
+
+      <div class="endpoint-row" style="margin-top:10px">
+        <div class="method GET">GET</div>
+        <div>
+          <strong>/api/categories/{id}/products</strong> — Produk berdasarkan kategori
+        </div>
+      </div>
+
+      <div style="margin-top:10px" class="endpoint-row">
+        <div class="method GET">GET</div>
+        <div>
+          <strong>/api/search</strong> — Pencarian produk (q param)
+        </div>
+      </div>
+
+      <div style="margin-top:10px" class="endpoint-row">
+        <div class="method GET">GET</div>
+        <div>
+          <strong>/api/trending-products</strong> — Trending (json)
+        </div>
+      </div>
+
+      <div style="margin-top:10px" class="endpoint-row">
+        <div class="method GET">GET</div>
+        <div>
+          <strong>/api/products/{id}/reviews</strong> — Review produk
+        </div>
+      </div>
+
+    </div>
+
+    <div>
+      <div class="muted small">Preview publik (demo):</div>
+      <div class="note" style="margin-top:8px">Jika kamu menjalankan di Laravel, gunakan Blade: <code>src="{{ url('/admin/produk-json') }}"</code></div>
+
+      <h4 style="margin-top:12px">Preview Produk (public demo)</h4>
+      <iframe class="iframe-preview" src="{{ url('/admin/produk-json') }}"></iframe>
+
+      <h4 style="margin-top:12px">Preview Kategori (public demo)</h4>
+      <iframe class="iframe-preview" src="{{ url('/admin/produk-kategori-json') }}"></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- ADMIN -->
+<section>
+  <h2>3. Admin — Role: admin (auth:api + RoleMiddleware)</h2>
+
+  <h3>Produk</h3>
+  <div class="endpoint-row">
+    <div class="method POST">POST</div>
+    <div>
+      <strong>/api/products</strong> — Tambah produk (admin)<br>
+      <span class="small">Body contoh (multipart/form-data jika upload gambar):</span>
+      <pre>{
+  "nama": "Keramik 40x40",
+  "slug": "keramik-40x40",
+  "harga": 25000,
+  "stok": 100,
+  "kategori_id": 1,
+  "deskripsi": "Keramik motif modern"
+}</pre>
+    </div>
+  </div>
+
+  <div style="margin-top:10px" class="endpoint-row">
+    <div class="method PUT">PUT</div>
+    <div>
+      <strong>/api/products/{id}</strong> — Update produk (admin)<br>
+      <pre>{
+  "nama": "Keramik 40x40 - Update",
+  "harga": 26000
+}</pre>
+    </div>
+  </div>
+
+  <div style="margin-top:10px" class="endpoint-row">
+    <div class="method DELETE">DELETE</div>
+    <div><strong>/api/products/{id}</strong> — Hapus produk</div>
+  </div>
+
+  <hr>
+
+  <h3>Kategori</h3>
+  <div class="endpoint-row">
+    <div class="method POST">POST</div>
+    <div>
+      <strong>/api/categories</strong> — Tambah kategori<br>
+      <pre>{
+  "nama": "Dapur"
+}</pre>
+    </div>
+  </div>
+
+  <div style="margin-top:10px" class="endpoint-row">
+    <div class="method DELETE">DELETE</div>
+    <div><strong>/api/categories/{id}</strong> — Hapus kategori</div>
+  </div>
+
+  <hr>
+
+  <h3>User Management</h3>
+  <div class="endpoint-row" style="margin-top:10px">
+    <div class="method GET">GET</div>
+    <div><strong>/api/users</strong> — Daftar user</div>
+  </div>
+
+  <div class="endpoint-row" style="margin-top:10px">
+    <div class="method PUT">PUT</div>
+    <div>
+      <strong>/api/users/{id}</strong> — Update user<br>
+      <pre>{
+  "name": "Admin Baru",
+  "email": "adminbaru@example.com"
+}</pre>
+    </div>
+  </div>
+
+  <div style="margin-top:10px" class="endpoint-row">
+    <div class="method DELETE">DELETE</div>
+    <div><strong>/api/users/{id}</strong> — Delete user</div>
+  </div>
+
+  <hr>
+
+  <h3>Profil Admin</h3>
+  <div class="endpoint-row">
+    <div class="method PUT">PUT</div>
+    <div><strong>/api/profile</strong> — Update profile admin (body contoh):<pre>{ "name":"Admin", "email":"admin@toko.com" }</pre></div>
+  </div>
+
+  <div style="margin-top:10px" class="endpoint-row">
+    <div class="method PUT">PUT</div>
+    <div>
+      <strong>/api/password</strong> — Ganti password admin<br>
+      <pre>{
+  "current_password": "oldpass",
+  "new_password": "newpass"
+}</pre>
+    </div>
+  </div>
+
+  <div style="margin-top:10px" class="endpoint-row">
+    <div class="method POST">POST</div>
+    <div><strong>/api/avatar</strong> — Upload avatar (multipart/form-data)</div>
+  </div>
+
+  <hr>
+
+  <h3>Orders (Admin)</h3>
+  <div class="endpoint-row" style="margin-top:10px">
+    <div class="method GET">GET</div>
+    <div><strong>/api/admin/orders</strong> — List orders (admin)</div>
+  </div>
+
+  <div class="endpoint-row" style="margin-top:10px">
+    <div class="method GET">GET</div>
+    <div><strong>/api/admin/orders/{id}</strong> — Detail order (admin)</div>
+  </div>
+
+  <div class="endpoint-row" style="margin-top:10px">
+    <div class="method PUT">PUT</div>
+    <div>
+      <strong>/api/admin/orders/{id}/shipping-status</strong><br>
+      <pre>{ "status_pengiriman": "dikemas" }</pre>
+    </div>
+  </div>
+
+  <div class="endpoint-row" style="margin-top:10px">
+    <div class="method PUT">PUT</div>
+    <div>
+      <strong>/api/admin/orders/{id}/status</strong><br>
+      <pre>{ "status": "paid" }</pre>
+    </div>
+  </div>
+
+  <div class="endpoint-row" style="margin-top:10px">
+    <div class="method PUT">PUT</div>
+    <div>
+      <strong>/api/admin/orders/{id}/resi</strong><br>
+      <pre>{ "no_resi": "JP123456789ID" }</pre>
+    </div>
+  </div>
+
+  <hr>
+
+  <div style="margin-top:10px" class="endpoint-row">
+    <div class="method DELETE">DELETE</div>
+    <div><strong>/api/images/{id}</strong> — Hapus gambar (admin)</div>
+  </div>
+
+  <div style="margin-top:14px" class="note small">Semua route di bagian Admin harus menggunakan header <code>Authorization: Bearer &lt;token&gt;</code> dan role admin.</div>
+</section>
+
+<!-- CUSTOMER -->
+<section>
+  <h2>4. Customer — Role: customer (auth:api)</h2>
+
+  <h3>Profil Customer</h3>
+  <div class="endpoint-row">
+    <div class="method GET">GET</div>
+    <div><strong>/api/customer/info</strong> — Lihat info customer</div>
+  </div>
+
+  <div class="endpoint-row" style="margin-top:10px">
+    <div class="method POST">POST</div>
+    <div>
+      <strong>/api/customer/info</strong> — Simpan info customer<br>
+      <pre>{
+  "nama": "Budi",
+  "telepon": "08123456789",
+  "alamat": "Jl. Merdeka No.1"
+}</pre>
+    </div>
+  </div>
+
+  <div class="endpoint-row" style="margin-top:10px">
+    <div class="method PUT">PUT</div>
+    <div>
+      <strong>/api/customer/info</strong> — Update info<br>
+      <pre>{
+  "nama": "Budi Baru",
+  "telepon": "0812xxx",
+  "alamat": "Alamat baru"
+}</pre>
+    </div>
+  </div>
+
+  <div style="margin-top:10px" class="endpoint-row">
+    <div class="method PUT">PUT</div>
+    <div>
+      <strong>/api/customer/password</strong> — Ganti password customer<br>
+      <pre>{
+  "current_password": "12345678",
+  "new_password": "newpassword"
+}</pre>
+    </div>
+  </div>
+
+  <div style="margin-top:10px" class="endpoint-row">
+    <div class="method POST">POST</div>
+    <div><strong>/api/customer/avatar</strong> — Upload avatar</div>
+  </div>
+
+  <div style="margin-top:10px" class="endpoint-row">
+    <div class="method DELETE">DELETE</div>
+    <div><strong>/api/customer/account</strong> — Hapus akun</div>
+  </div>
+
+  <hr>
+
+  <h3>Order Customer</h3>
+  <div class="endpoint-row">
+    <div class="method GET">GET</div>
+    <div><strong>/api/orders</strong> — List orders (customer)</div>
+  </div>
+
+  <div style="margin-top:10px" class="endpoint-row">
+    <div class="method GET">GET</div>
+    <div><strong>/api/orders/by-id/{order_id}</strong> — Detail by order_id</div>
+  </div>
+
+  <div style="margin-top:10px" class="endpoint-row">
+    <div class="method GET">GET</div>
+    <div><strong>/api/payment-detail/{order_id}</strong> — Payment detail</div>
+  </div>
+</section>
+
+<!-- AUTHENTICATED (GENERAL) -->
+<section>
+  <h2>5. Authenticated — Cart, Checkout, Wishlist, Reviews</h2>
+
+  <h3>Cart</h3>
+  <div class="endpoint-row">
+    <div class="method POST">POST</div>
+    <div>
+      <strong>/api/cart</strong> — Tambah ke cart<br>
+      <pre>{
+  "product_id": 12,
+  "qty": 2
+}</pre>
+    </div>
+  </div>
+
+  <div style="margin-top:10px" class="endpoint-row">
+    <div class="method GET">GET</div>
+    <div><strong>/api/cart</strong> — Lihat cart</div>
+  </div>
+
+  <div style="margin-top:10px" class="endpoint-row">
+    <div class="method GET">GET</div>
+    <div><strong>/api/cart-count</strong> — Jumlah item cart</div>
+  </div>
+
+  <div style="margin-top:10px" class="endpoint-row">
+    <div class="method POST">POST</div>
+    <div>
+      <strong>/api/products-by-id</strong> — Ambil produk berdasarkan id (body: [1,2,3])<br>
+      <pre>[1,2,3]</pre>
+    </div>
+  </div>
+
+  <div style="margin-top:10px" class="endpoint-row">
+    <div class="method PUT">PUT</div>
+    <div><strong>/api/cart/{id}</strong> — Update qty</div>
+  </div>
+
+  <div style="margin-top:10px" class="endpoint-row">
+    <div class="method DELETE">DELETE</div>
+    <div><strong>/api/cart/{id}</strong> — Hapus item cart</div>
+  </div>
+
+  <div style="margin-top:10px" class="endpoint-row">
+    <div class="method DELETE">DELETE</div>
+    <div><strong>/api/cart/clear</strong> — Clear cart</div>
+  </div>
+
+  <div style="margin-top:10px" class="endpoint-row">
+    <div class="method DELETE">DELETE</div>
+    <div><strong>/api/cart/clear/{customer_id}</strong> — Clear berdasarkan customer</div>
+  </div>
+
+  <hr>
+
+  <h3>Checkout & Midtrans</h3>
+  <div class="endpoint-row">
+    <div class="method POST">POST</div>
+    <div>
+      <strong>/api/checkout</strong> — Buat order / checkout<br>
+      <pre>{
+  "customer_id": 1,
+  "alamat": "Jl. Test",
+  "kota": "Bandung",
+  "ongkir": 30000,
+  "subtotal": 250000,
+  "grand_total": 280000,
+  "items": [
+    { "product_id": 3, "qty": 2, "harga": 125000 }
+  ]
+}</pre>
+    </div>
+  </div>
+
+  <div style="margin-top:10px" class="endpoint-row">
+    <div class="method POST">POST</div>
+    <div>
+      <strong>/api/checkout/midtrans</strong> — Get snap token (body contoh):<br>
+      <pre>{
+  "order_id": "INV-2025-01",
+  "gross_amount": 280000
+}</pre>
+    </div>
+  </div>
+
+  <hr>
+
+  <h3>Reviews</h3>
+  <div class="endpoint-row">
+    <div class="method POST">POST</div>
+    <div>
+      <strong>/api/reviews</strong> — Submit review (auth)<br>
+      <pre>{
+  "product_id": 3,
+  "rating": 5,
+  "comment": "Bagus kualitasnya"
+}</pre>
+    </div>
+  </div>
+
+  <hr>
+
+  <h3>Wishlist</h3>
+  <div class="endpoint-row">
+    <div class="method GET">GET</div>
+    <div><strong>/api/wishlist</strong> — Lihat wishlist</div>
+  </div>
+
+  <div style="margin-top:10px" class="endpoint-row">
+    <div class="method POST">POST</div>
+    <div>
+      <strong>/api/wishlist</strong> — Tambah wishlist<br>
+      <pre>{ "product_id": 5 }</pre>
+    </div>
+  </div>
+
+  <div style="margin-top:10px" class="endpoint-row">
+    <div class="method DELETE">DELETE</div>
+    <div><strong>/api/wishlist/{productId}</strong> — Hapus wishlist</div>
+  </div>
+
+</section>
+
+<!-- SHIPPING & RAJAONGKIR -->
+<section>
+  <h2>6. Shipping & Ongkir</h2>
+
+  <div class="endpoint-row">
+    <div class="method POST">POST</div>
+    <div>
+      <strong>/api/checkout/shipping</strong> — Hitung ongkir (example body depends on implementation)
+      <pre>{
+  "origin": "501",
+  "destination": "114",
+  "weight": 2000,
+  "courier": "jne"
+}</pre>
+    </div>
+  </div>
+
+  <div style="margin-top:10px" class="endpoint-row">
+    <div class="method GET">GET</div>
+    <div><strong>/api/shipping/provinces</strong> — Daftar provinsi (ongkir)</div>
+  </div>
+
+  <div style="margin-top:10px" class="endpoint-row">
+    <div class="method GET">GET</div>
+    <div><strong>/api/shipping/cities/{province}</strong> — Kota by province</div>
+  </div>
+
+  <hr>
+
+  <h3>RajaOngkir specific</h3>
+  <div class="endpoint-row">
+    <div class="method GET">GET</div>
+    <div><strong>/api/provinces</strong></div>
+  </div>
+  <div class="endpoint-row" style="margin-top:10px">
+    <div class="method GET">GET</div>
+    <div><strong>/api/cities/{provinceId}</strong></div>
+  </div>
+  <div class="endpoint-row" style="margin-top:10px">
+    <div class="method GET">GET</div>
+    <div><strong>/api/districts/{cityId}</strong></div>
+  </div>
+  <div class="endpoint-row" style="margin-top:10px">
+    <div class="method POST">POST</div>
+    <div><strong>/api/check-ongkir</strong> — Body contoh lihat di atas</div>
+  </div>
+</section>
+
+<!-- BITESHIP & SHIPPER -->
+<section>
+  <h2>7. Courier Integrations</h2>
+
+  <div class="endpoint-row">
+    <div class="method POST">POST</div>
+    <div><strong>/api/biteship/order</strong> — Create biteship order (body sesuai API Biteship)</div>
+  </div>
+
+  <div style="margin-top:10px" class="endpoint-row">
+    <div class="method GET">GET</div>
+    <div><strong>/api/test-biteship-key</strong> — Test key debug (returns env/config)</div>
+  </div>
+
+  <div style="margin-top:10px" class="endpoint-row">
+    <div class="method POST">POST</div>
+    <div><strong>/api/shipper/order</strong> — Create shipper order</div>
+  </div>
+
+  <div style="margin-top:10px" class="endpoint-row">
+    <div class="method GET">GET</div>
+    <div><strong>/api/shipper/rates/test</strong> — Test rates</div>
+  </div>
+</section>
+
+<!-- MIDTRANS -->
+<section>
+  <h2>8. Midtrans</h2>
+
+  <div class="endpoint-row">
+    <div class="method POST">POST</div>
+    <div><strong>/api/midtrans/webhook</strong> — Midtrans webhook (server -> kamu)</div>
+  </div>
+
+  <div style="margin-top:10px" class="endpoint-row">
+    <div class="method GET">GET</div>
+    <div><strong>/api/debug-midtrans</strong> — Debug keys (server_key, client_key, is_production)</div>
+  </div>
+
+  <div style="margin-top:10px" class="endpoint-row">
+    <div class="method POST">POST</div>
+    <div><strong>/api/midtrans/callback</strong> — Callback endpoint (Midtrans)</div>
+  </div>
+
+  <div style="margin-top:10px" class="muted small note">Catatan: Jangan buka Snap di iframe; gunakan redirect ke browser / native webview yang mendukung popup dan callback.</div>
+</section>
+
+<!-- FONNTE -->
+<section>
+  <h2>9. Fonnte (notif)</h2>
+
+  <div class="endpoint-row">
+    <div class="method GET">GET</div>
+    <div><strong>/api/fonnte-test</strong> — Test kirim message</div>
+  </div>
+
+  <div style="margin-top:10px" class="endpoint-row">
+    <div class="method POST">POST</div>
+    <div><strong>/api/send-message</strong> — Kirim pesan via fonnte (body sesuai implementasi)</div>
+  </div>
+</section>
+
+<!-- ORDERS PUBLIC -->
+<section>
+  <h2>10. Public Demo — Orders / Produk JSON</h2>
+  <p class="small">Preview JSON demo untuk bukti (tanpa auth).</p>
+
+  <div style="margin-top:8px">
+    <strong>/admin/produk-json</strong>
+    <iframe class="iframe-preview" src="{{ url('/admin/produk-json') }}"></iframe>
+  </div>
+
+  <div style="margin-top:12px">
+    <strong>/admin/produk-kategori-json</strong>
+    <iframe class="iframe-preview" src="{{ url('/admin/produk-kategori-json') }}"></iframe>
+  </div>
+
+  <div style="margin-top:12px">
+    <strong>/admin/orders-json</strong>
+    <iframe class="iframe-preview" src="{{ url('/admin/orders-json') }}"></iframe>
+  </div>
+</section>
+
+<!-- MISC -->
+<section>
+  <h2>11. Misc / Utilities</h2>
+
+  <div class="endpoint-row">
+    <div class="method PATCH">PATCH</div>
+    <div><strong>/api/order-status</strong> — Update status (public patch route used by webhook callbacks)</div>
+  </div>
+
+  <div style="margin-top:10px" class="endpoint-row">
+    <div class="method PUT">PUT</div>
+    <div><strong>/api/admin/orders/{id}/resi</strong> — Update resi (also present earlier)</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<section>
+  <h2>Catatan Penting</h2>
+  <ul>
+    <li class="small">Gunakan header <code>Authorization: Bearer &lt;token&gt;</code> untuk semua endpoint yang protected.</li>
+    <li class="small">Endpoint webhook (Midtrans) harus terpasang di server publik dan memverifikasi signature Midtrans.</li>
+    <li class="small">Jika ingin saya generate Postman collection / Insomnia export dari dokumentasi ini, saya bisa buatkan.</li>
+    <li class="small">Kalau mau saya ubah jadi Blade (<code>resources/views/api.blade.php</code>) dengan helper URL otomatis, bilang saja.</li>
+  </ul>
+</section>
+
+</body>
+</html>

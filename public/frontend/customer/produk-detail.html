@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Detail Produk</title>
+  <link rel="stylesheet" href="produk-detail.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="logo">🛍️ Toko Online</div>
+    <nav class="nav-links">
+      <a href="index.html">Produk</a>
+      <a href="keranjang.html">Keranjang</a>
+      <a href="riwayat.html">Riwayat</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="product-detail">
+      <div class="gallery-section">
+        <img id="mainImage" src="" class="main-image" />
+        <div id="thumbnailList" class="thumbnail-list"></div>
+      </div>
+
+      <div class="info-section">
+        <h1 id="productName"></h1>
+        <p class="price" id="productPrice"></p>
+        <p class="stock" id="productStock"></p>
+        <p class="category" id="productCategory"></p>
+        <p class="description" id="productDescription"></p>
+
+        <h3>Spesifikasi</h3>
+        <ul id="specList" class="spec-list"></ul>
+
+        <h3>Pilih Warna</h3>
+        <div id="colorOptions" class="color-options"></div>
+
+        <div class="action-buttons">
+          <button id="addToCartBtn">🛒 Tambah ke Keranjang</button>
+          <button id="wishlistBtn">❤️ Wishlist</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="produk-detail.js"></script>
+</body>
+</html>

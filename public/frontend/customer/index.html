@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Katalog Produk</title>
+  <link rel="stylesheet" href="index.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="logo">🛍️ Toko Online</div>
+   <div class="welcome">
+    <a href="avatar.html" title="Ganti Foto">
+  <img id="avatarPreview" src="/images/default.jpg" alt="Avatar" class="avatar-topbar" />
+</a>
+Halo, <span id="customerName">Customer</span>
+</div>
+    <nav class="nav-links">
+      <a href="index.html">Produk</a>
+      <a href="keranjang.html">Keranjang</a>
+      <a href="riwayat.html">Riwayat</a>
+      <a href="profil.html">Profil</a>
+      <a href="avatar.html">Avatar</a>
+      <button id="logoutBtn">Logout</button>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Kategori</h2>
+    <div id="categoryList" class="category-grid">Memuat kategori...</div>
+
+    <h2>🔥 Produk Trending dari Twitter</h2>
+    <div id="recommendation" class="recommendation">Memuat rekomendasi...</div>
+    <div id="chatbot">
+  <h3>🤖 Chatbot AI</h3>
+  <div id="chatWindow" style="border:1px solid #ccc; padding:10px; height:200px; overflow-y:auto;"></div>
+  <input id="chatInput" type="text" placeholder="Tulis pesan..." style="width:80%;" />
+  <button id="sendBtn">Kirim</button>
+</div>
+
+
+    <h2>Daftar Produk</h2>
+    <div id="productList" class="product-grid">Memuat produk...</div>
+  </main>
+
+  <script type="module" src="index.js"></script>
+</body>
+</html>

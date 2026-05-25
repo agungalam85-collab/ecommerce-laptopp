@@ -1,0 +1,136 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f9f9f9;
+}
+
+.topbar {
+  background: #333;
+  color: white;
+  padding: 12px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-links a {
+  color: white;
+  margin-left: 16px;
+  text-decoration: none;
+}
+
+.product-detail {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  padding: 40px;
+  background: white;
+  max-width: 1200px;
+  margin: auto;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(0,0,0,0.05);
+}
+
+.gallery-section {
+  flex: 1;
+  min-width: 300px;
+}
+
+.main-image {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 8px;
+  object-fit: cover;
+  box-shadow: 0 0 6px rgba(0,0,0,0.1);
+}
+
+.thumbnail-list {
+  margin-top: 12px;
+}
+
+.thumbnail-list img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  margin-right: 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.thumbnail-list img:hover {
+  transform: scale(1.05);
+}
+
+.info-section {
+  flex: 1;
+  min-width: 300px;
+}
+
+.price {
+  font-size: 1.4em;
+  color: #d33;
+  margin: 8px 0;
+}
+
+.stock {
+  font-weight: bold;
+  color: #2a9d8f;
+}
+
+.category {
+  font-style: italic;
+  color: #666;
+}
+
+.description {
+  margin: 12px 0;
+  line-height: 1.5;
+}
+
+.spec-list {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0;
+}
+
+.spec-list li {
+  margin-bottom: 6px;
+}
+
+.color-options label {
+  display: inline-block;
+  margin-right: 12px;
+  margin-top: 8px;
+  cursor: pointer;
+}
+
+.color-dot {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin-right: 6px;
+  vertical-align: middle;
+  border: 1px solid #ccc;
+}
+
+.action-buttons {
+  margin-top: 20px;
+}
+
+.action-buttons button {
+  padding: 10px 20px;
+  margin-right: 12px;
+  border: none;
+  border-radius: 6px;
+  background: #333;
+  color: white;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.action-buttons button:hover {
+  background: #555;
+}

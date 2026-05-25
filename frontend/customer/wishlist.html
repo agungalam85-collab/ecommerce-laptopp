@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Wishlist – MistarPart</title>
+  <link rel="stylesheet" href="index.css" />
+  <style>
+    /* Footer bio bergeser */
+    footer {
+      background:#002244; color:#fff;
+      padding:40px 40px; margin-top:30px;
+      margin-left: 240px; /* ✅ geser sesuai sidebar */
+    }
+    footer .grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:20px; text-align:left;
+    }
+    footer h3, footer h4 { margin-top:0; }
+    footer p { margin:6px 0; font-size:0.9rem; }
+
+    @media (max-width: 768px) {
+      footer { margin-left: 0; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <h3>📂 Menu</h3>
+    <ul>
+      <li><a href="index.html">🏷️ Produk</a></li>
+      <li><a href="keranjang.html">🛒 Keranjang</a></li>
+      <li><a href="riwayat.html">📜 Riwayat</a></li>
+      <li><a href="profil.html">👤 Profil</a></li>
+      <li><a href="avatar.html">🖼️ Avatar</a></li>
+      <li><a href="wishlist.html">❤️ Wishlist</a></li>
+    </ul>
+  </aside>
+
+  <!-- Konten Utama -->
+  <div class="main-content">
+    <header class="topbar">
+      <div class="logo">🛍️ <strong>MistarPart</strong></div>
+      <div class="welcome">
+        <a href="avatar.html" title="Ganti Foto">
+          <img id="avatarPreview" src="/images/default.jpg" alt="Avatar" class="avatar-topbar" />
+        </a>
+        Halo, <span id="customerName">Customer</span>
+      </div>
+      <nav class="nav-links">
+        <button id="logoutBtn">Logout</button>
+      </nav>
+    </header>
+
+    <main>
+      <h2>❤️ Wishlist Kamu</h2>
+      <div id="wishlistList" class="product-grid">Memuat wishlist...</div>
+    </main>
+  </div>
+
+  <!-- Footer Bio -->
+  <footer>
+    <div class="grid">
+      <div>
+        <h3>🏍️ MistarPart</h3>
+        <p><strong>Sparepart & Accessories Motor Berkualitas</strong></p>
+        <p>MistarPart hadir sebagai solusi kebutuhan sparepart dan aksesoris motor dengan kualitas terjamin
+           dan harga bersahabat. Kami berkomitmen memberikan pelayanan terbaik agar setiap pelanggan
+           mendapatkan produk yang sesuai dengan kebutuhan kendaraannya.</p>
+      </div>
+      <div>
+        <h4>📞 Kontak</h4>
+        <p>📍 Alamat:<br/> Gg. H. Tosin RT003/RW005 Sudimara Sel, Kec. Ciledug, Kota Tangerang, Banten 15151</p>
+        <p>📱 Telp/WA: 085890501191</p>
+        <p>✉️ Email: <em>info@mistarpart.com</em></p>
+        <p>⏰ Jam Operasional:<br/> Senin–Sabtu, 09.00–18.00 WIB</p>
+      </div>
+      <div>
+        <h4>ℹ️ Informasi</h4>
+        <p>🔗 Sosial Media: <em>Segera menyusul</em></p>
+        <p>© 2020–2025 MistarPart. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="wishlist.js"></script>
+</body>
+</html>

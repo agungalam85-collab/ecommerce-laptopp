@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Kelola Kategori</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<header class="topbar">
+  <div class="topbar-left">
+    <span class="admin-name">admin</span>
+    <img id="avatar" src="assets/default-avatar.jpg" alt="Admin" class="profile-icon" />
+  </div>
+  <div class="topbar-right">
+
+    <span class="brand-name">Admin Panel</span>
+  </div>
+</header>
+<body>
+  <div class="sidebar">
+    <h2>Admin Menu</h2>
+    <ul>
+      <li><a href="dashboard.html">🏠 Dashboard</a></li>
+      <li><a href="produk.html">📦 Produk</a></li>
+      <li><a href="kategori.html" class="active">🗂️ Kategori</a></li>
+       <li><a href="pesanan.html">🧾 Pesanan</a></li>
+	  <li><a href="pengguna.html">👥 Pengguna</a></li>
+	  <li><a href="pengaturan.html">⚙️ Pengaturan</a></li>
+      <li><a href="#" onclick="logout()">🔓 Logout</a></li>
+    </ul>
+  </div>
+
+  <div class="main-content">
+    <h1>Kelola Kategori</h1>
+    <a href="dashboard.html"><button>Kembali ke Dashboard</button></a>
+
+    <form id="addCategoryForm">
+      <input type="text" name="name" placeholder="Nama Kategori" required />
+      <button type="submit">Tambah Kategori</button>
+    </form>
+
+    <h3>Daftar Kategori</h3>
+    <ul id="categoryList"></ul>
+  </div>
+
+  <script src="kategori.js"></script>
+  <script src="topbar.js" defer></script>
+
+
+</body>
+</html>

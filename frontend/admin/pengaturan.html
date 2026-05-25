@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pengaturan Akun</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <h2>Admin Menu</h2>
+    <ul>
+      <li><a href="dashboard.html">🏠 Dashboard</a></li>
+      <li><a href="produk.html">📦 Produk</a></li>
+      <li><a href="kategori.html">🗂️ Kategori</a></li>
+       <li><a href="pesanan.html">🧾 Pesanan</a></li>
+       <li><a href="pengguna.html">👥 Pengguna</a></li>
+      <li><a href="pengaturan.html" class="active">⚙️ Pengaturan</a></li>
+      <li><a href="#" onclick="logout()">🔓 Logout</a></li>
+    </ul>
+  </aside>
+
+  <!-- Konten Utama -->
+  <!-- Topbar -->
+<header class="topbar">
+  <div class="topbar-left">
+    <span class="admin-name">admin</span>
+   <img id="avatar" src="assets/default-avatar.jpg" alt="Admin" class="profile-icon" />
+  </div>
+  <div class="topbar-right">
+
+    <span class="brand-name">Admin Panel</span>
+  </div>
+
+</header>
+  <main class="main-content">
+    <div class="container">
+      <h1 class="page-title">⚙️ Pengaturan Akun</h1>
+
+      <!-- Info Akun -->
+      <section class="card-box">
+        <h2>👤 Info Akun</h2>
+        <div class="info-akun">
+          <p><strong>Nama:</strong> <span id="nama">admin</span></p>
+          <p><strong>Email:</strong> <span id="email">admin@gmail.com</span></p>
+          <p><strong>Role:</strong> <span id="role">admin</span></p>
+        </div>
+      </section>
+
+      <!-- Update Profil -->
+      <section class="card-box">
+        <h2>✏️ Update Profil</h2>
+        <form id="form-profil">
+          <input type="text" id="name" placeholder="Nama" required />
+          <input type="email" id="email" placeholder="Email" required />
+          <button type="submit">Update</button>
+        </form>
+      </section>
+	  <section class="card-box">
+  <h2>🖼️ Foto Profil</h2>
+<section class="card-box">
+  <div class="avatar-preview">
+    <img id="avatar" src="assets/default-avatar.jpg" alt="Foto Admin" class="profile-icon" />
+  </div>
+  <form id="form-avatar" enctype="multipart/form-data">
+    <input type="file" id="avatarInput" accept="image/*" />
+    <button type="submit">Upload Foto</button>
+  </form>
+</section>
+
+      <!-- Ganti Password -->
+      <section class="card-box">
+        <h2>🔒 Ganti Password</h2>
+        <form id="form-password">
+          <input type="password" id="old_password" placeholder="Password Lama" required />
+          <input type="password" id="new_password" placeholder="Password Baru" required />
+          <input type="password" id="confirm_password" placeholder="Konfirmasi Password" required />
+          <button type="submit">Ganti Password</button>
+        </form>
+      </section>
+    </div>
+  </main>
+
+	<script src="topbar.js" defer></script>
+  <script src="pengaturan.js"></script>
+</body>
+</html>
+
+
+

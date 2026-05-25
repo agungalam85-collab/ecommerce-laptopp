@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Detail Produk – MistarPart</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="produk-detail.css" />
+  <style>
+    /* Sidebar */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 220px;
+      height: 100%;
+      background: #111;
+      color: #fff;
+      padding: 20px;
+    }
+    .sidebar ul { list-style:none; padding:0; }
+    .sidebar li { margin:10px 0; }
+    .sidebar a { color:#fff; text-decoration:none; }
+
+    /* Konten utama bergeser */
+    .main-content {
+      margin-left: 220px;
+      padding: 20px;
+    }
+
+    /* Footer bio bergeser */
+    footer {
+      background:#002244; color:#fff;
+      padding:40px 40px; margin-top:30px;
+      margin-left: 220px; /* geser sesuai sidebar */
+    }
+    footer .grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:20px; text-align:left;
+    }
+    footer h3, footer h4 { margin-top:0; }
+    footer p { margin:6px 0; font-size:0.9rem; }
+  </style>
+</head>
+<body>
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <h3>📂 Menu</h3>
+    <ul>
+      <li><a href="index.html">🏷️ Produk</a></li>
+      <li><a href="keranjang.html">🛒 Keranjang</a></li>
+      <li><a href="riwayat.html">📜 Riwayat</a></li>
+      <li><a href="profil.html">👤 Profil</a></li>
+      <li><a href="avatar.html">🖼️ Avatar</a></li>
+      <li><a href="wishlist.html">❤️ Wishlist</a></li>
+    </ul>
+  </aside>
+
+  <!-- Konten Utama -->
+  <div class="main-content">
+    <header class="topbar">
+      <div class="logo">🛍️ <strong>MistarPart</strong></div>
+      <div class="welcome">
+        <a href="avatar.html" title="Ganti Foto">
+          <img id="avatarPreview" src="/images/default.jpg" alt="Avatar" class="avatar-topbar" />
+        </a>
+        Halo, <span id="customerName">Customer</span>
+      </div>
+      <nav class="nav-links">
+        <button id="logoutBtn">Logout</button>
+      </nav>
+    </header>
+
+    <main>
+      <!-- Detail Produk -->
+      <section class="product-detail">
+        <div class="gallery-section">
+          <img id="mainImage" src="" class="main-image" />
+          <div id="thumbnailList" class="thumbnail-list"></div>
+        </div>
+
+        <div class="info-section">
+          <h1 id="productName"></h1>
+          <p class="price" id="productPrice"></p>
+          <p class="stock" id="productStock"></p>
+          <p class="category" id="productCategory"></p>
+          <p class="description" id="productDescription"></p>
+
+          <h3>Spesifikasi</h3>
+          <ul id="specList" class="spec-list"></ul>
+
+          <h3>Pilih Warna</h3>
+          <div id="colorOptions" class="color-options"></div>
+
+          <div class="action-buttons">
+            <button id="addToCartBtn">🛒 Tambah ke Keranjang</button>
+            <button id="wishlistBtn">❤️ Wishlist</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Komentar Customer -->
+      <section id="reviewSection" class="review-section">
+        <h3>🗣️ Komentar Customer</h3>
+
+        <!-- Daftar komentar -->
+        <div id="reviewList">
+          <p>Memuat komentar...</p>
+        </div>
+
+        <!-- Form kirim komentar -->
+        <div id="reviewForm" class="review-form">
+          <h4>Tulis Komentar</h4>
+          <textarea id="commentInput" placeholder="Tulis komentar kamu..." rows="3"></textarea>
+
+          <label for="ratingInput">Rating:</label>
+          <select id="ratingInput">
+            <option value="5">⭐️⭐️⭐️⭐️⭐️</option>
+            <option value="4">⭐️⭐️⭐️⭐️</option>
+            <option value="3">⭐️⭐️⭐️</option>
+            <option value="2">⭐️⭐️</option>
+            <option value="1">⭐️</option>
+          </select>
+
+          <button id="submitReviewBtn">Kirim Komentar</button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Footer Bio -->
+  <footer>
+    <div class="grid">
+      <div>
+        <h3>🏍️ MistarPart</h3>
+        <p><strong>Sparepart & Accessories Motor Berkualitas</strong></p>
+        <p>MistarPart hadir sebagai solusi kebutuhan sparepart dan aksesoris motor dengan kualitas terjamin
+           dan harga bersahabat. Kami berkomitmen memberikan pelayanan terbaik agar setiap pelanggan
+           mendapatkan produk yang sesuai dengan kebutuhan kendaraannya.</p>
+      </div>
+      <div>
+        <h4>📞 Kontak</h4>
+        <p>📍 Alamat:<br/> Gg. H. Tosin RT003/RW005 Sudimara Sel, Kec. Ciledug, Kota Tangerang, Banten 15151</p>
+        <p>📱 Telp/WA: 085890501191</p>
+        <p>✉️ Email: <em>info@mistarpart.com</em></p>
+        <p>⏰ Jam Operasional:<br/> Senin–Sabtu, 09.00–18.00 WIB</p>
+      </div>
+      <div>
+        <h4>ℹ️ Informasi</h4>
+        <p>🔗 Sosial Media: <em>Segera menyusul</em></p>
+        <p>© 2020–2025 MistarPart. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="produk-detail.js"></script>
+</body>
+</html>

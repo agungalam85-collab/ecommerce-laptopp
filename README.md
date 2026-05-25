@@ -32,8 +32,10 @@ Project ini dibuat sebagai bagian dari **skripsi & portfolio**, sekaligus showca
 - 🚚 Shipping Cost (RajaOngkir)  
 - 📊 Admin Dashboard  
 
-## 🖥️ Screenshots
-<img width="144" height="154" alt="image" src="https://github.com/user-attachments/assets/55f89282-e028-4172-8a64-c8d1b3ba6292" />
+## 🖥️ Screenshots=
+<img width="932" height="923" alt="image" src="https://github.com/user-attachments/assets/7a0647a4-8c22-47b5-83e5-7539b7fcbd24" />
+<img width="731" height="663" alt="image" src="https://github.com/user-attachments/assets/ede2b007-9d58-4f5d-b368-7e9e5206fbc2" />
+<img width="327" height="498" alt="image" src="https://github.com/user-attachments/assets/cde039ab-3bd7-4302-a65e-a7e39b32dab2" />
 
 
 ## 🛠️ Cara Install & Jalankan
